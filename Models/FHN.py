@@ -23,6 +23,14 @@ class FHN:
     # weaker separation
     # less neuron-like  
 
+    v = sp.symbols('v')
+    w = sp.symbols('w') 
+    a = sp.symbols('a')
+    b = sp.symbols('b')
+    I = sp.symbols('I')
+    dv = v - (v**3/3) -  w + I
+    dw = v + a - (b*w)
+
     def f(vt,wt):
         global I_ext
         dvt = vt - (vt**3/3) - wt + I_ext
@@ -37,18 +45,17 @@ class FHN:
     #An equilibrium point is any point that makes all rates 0 simultaneously
 
     def get_equilibrium():
-        v_e = fsolve(f,[1,1])
-        w_e = fsolve(g,[1,1])
+        global dv,dw
+        v_e = fsolve(dv,(1,1))
+        w_e = fsolve(dw,[1,1])
         return v_e, w_e
     
-    v = sp.symbols('v')
-    w = sp.symbols('w') 
     J = []
     
     def jacobian(v,w):
-        global J
-        J[0][0] = np.diff(f(vt,wt),v)
-        J[0][1] = np.diff(f(vt,wt),w)
-        J[1][0] = np.diff(g,v)
-        J[1][1] = np.diff(g,w)
+        global J,a,b,I,dv,dw
+        J[0][0] = np.diff(dv,v)
+        J[0][1] = np.diff(dv,w)
+        J[1][0] = np.diff((1/tau)*dw,v)
+        J[1][1] = np.diff((1/tau)*dw,w)
         return J
