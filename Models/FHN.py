@@ -71,6 +71,7 @@ class FHN:
         var = sp.Matrix([v,w])
         self.J = F.jacobian(var)
         self.J_e = self.J.subs({v: self.v_e, w: self.w_e, a: self.a, b: self.b, I: self.I_ext})
+        #Formatting required to use np.linalg.eigvals
         self.J_e = np.array(self.J_e).astype(np.float64).reshape(2,2)
         return self.J, self.J_e
 
