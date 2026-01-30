@@ -3,8 +3,7 @@ from pathlib import Path
 import json
 from Models.FHN import FHN
     
-def simulation():
-
+def deterministic():
 
     # BASE_DIR = Path(__file__).resolve().parent.parent
     # __file__ is the path to the current Python script.
@@ -54,4 +53,4 @@ def simulation():
     print("Jacobian Function:", J_e)
     neuron.is_excitable()
 
-simulation()
+    return v,w,v_e,w_e,J_e
