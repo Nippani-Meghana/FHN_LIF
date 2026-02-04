@@ -37,8 +37,8 @@ def deterministic():
     neuron = FHN(a, b, tau, I_ext)
 
     # Initial conditions
-    v[0] = -1
-    w[0] = 0
+    v[0] = -1.00125
+    w[0] = -0.46
 
     # Time evolution loop
     for i in range(1, steps):
