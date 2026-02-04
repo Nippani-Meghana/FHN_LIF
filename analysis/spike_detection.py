@@ -4,20 +4,18 @@ from simulation.deterministic import deterministic
 import numpy as np
 
 def spikes_fhn():
-    v,w,v_e,w_e,J_e = deterministic()
+    v, w, v_e, w_e, J_e = deterministic()
     v_th = -0.7
-    spike_count = 0
-    spikes_volts = []
-    for i in v:
-        if i>=v_th:
-            spike_count += 1
-            spikes_volts.append(v)
 
+    spike_times = []
 
-    print("Number of spikes are:",spike_count)
-    print("Spike Voltages are :")
-    for i in spikes_volts:
-        print(i)
+    for i in range(1, len(v)):
+        if v[i-1] < v_th and v[i] >= v_th:
+            spike_times.append(i)
+
+    print("Total voltages recorded:", len(v))
+    print("Number of spikes:", len(spike_times))
+  
 
 
 spikes_fhn()
