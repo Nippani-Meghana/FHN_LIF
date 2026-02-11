@@ -81,6 +81,6 @@ class FHN:
     def is_excitable(self):
         eigenvalues = np.linalg.eigvals(self.J_e)
         if np.all(np.real(eigenvalues) < 0):
-            print("Stable")
+            stability = "stable"
         else:
-            print("Unstable")
+            stability = "unstable"
