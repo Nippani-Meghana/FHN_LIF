@@ -16,14 +16,16 @@ class ensemble_stats:
         trial_spike_count_dict = {}
 
         for i in range(1,101):
+            if i % 10 == 0:  # This will give an update every 10 trials
+                print(f"Simulation in progress: {i}% complete...")
             trial_data = self.spikes_fhn(ch)
             trial_spike_timing_dict[i] = trial_data
             trial_spike_count_dict[i] = len(trial_data)
 
-        print("Trials and Spike Count: ",trial_spike_count_dict)
-        print("Trials and Spike Timings: ",trial_spike_timing_dict)
 
-    def spikes_fhn(ch):
+        return trial_spike_count_dict, trial_spike_timing_dict
+
+    def spikes_fhn(self,ch):
         if(ch == 1):
             v,w,v_e,w_e,J_e = simulation.deterministic(-1.00125,-0.46)
         elif(ch == 2):
