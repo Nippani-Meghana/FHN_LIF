@@ -2,8 +2,25 @@ import simulation
 import visualization
 import Models
 import analysis
+import sys
 
-stats = analysis.ensemble_stats()
-count, timing = stats.trials()
+while(True):
+    print("====DASHBOARD====")
+    print("1. Deterministic FHN")
+    print("2. Stochastive Additive FHN")
+    print("3. Stochastive Multiplicative FHN")
+    print("4. Embedded LIF")
+    print("5. Exit")
+    ch = int(input('Please make your choice: '))
+    stats = analysis.ensemble_stats()
 
-print("Trials and Spike Count: ",count)
+    if(ch == 5):
+        print("Program Terminated!")
+        sys.exit()
+
+    count, timing,isi,cv,fano_factor = stats.trials_stats(ch)
+
+    print("Trials and Spike Count: ",count)
+    print("ISI: ",isi)
+    print("CV:",cv)
+    print("Fano Factor: ",fano_factor)
