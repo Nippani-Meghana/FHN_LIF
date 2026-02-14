@@ -66,7 +66,7 @@ class FHN:
         b = sp.symbols('b')
         I = sp.symbols('I')
         dv = v - (v**3/3) -  w + I
-        dw = v + a - (b*w)*(1/self.tau)
+        dw = (1/self.tau) * (v + a - (b*w))
         F = sp.Matrix([dv,dw])
         var = sp.Matrix([v,w])
         self.J = F.jacobian(var)
