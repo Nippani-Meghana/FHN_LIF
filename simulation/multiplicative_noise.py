@@ -2,7 +2,7 @@ import numpy as np
 from Models.FHN import FHN
 from simulation import path_calling
 
-def multiplicative_noise(v0,w0):
+def multiplicative_noise(v0,w0, sigma):
     """
     Simulates the FitzHugh-Nagumo (FHN) model with multiplicative stochastic noise 
     using a Second-Order Stochastic Runge-Kutta (Heun) method.
@@ -35,7 +35,6 @@ def multiplicative_noise(v0,w0):
 
     # Time evolution loop
     for i in range(1, steps):
-        sigma = 0.02
         delta_B = np.sqrt(dt) * np.random.normal(0, 1)
         v_predictor = v[i-1] + neuron.f(v[i-1], w[i-1])*dt
         w_predictor = w[i-1] + neuron.g(v[i-1], w[i-1]) * dt + (sigma*delta_B*w[i-1])

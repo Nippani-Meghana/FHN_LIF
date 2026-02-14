@@ -2,7 +2,7 @@ import numpy as np
 from Models.FHN import FHN
 from simulation import path_calling
 
-def additive_noise(v0,w0):
+def additive_noise(v0,w0, sigma):
     """
     Simulates the FitzHugh-Nagumo (FHN) model with additive stochastic noise 
     using the Euler-Maruyama numerical method.
@@ -37,7 +37,6 @@ def additive_noise(v0,w0):
     # Time evolution loop
     for i in range(1, steps):
         # Noise intensity parameter (sigma)
-        sigma = 0.02
         noise = sigma * np.random.normal(0, 1) * np.sqrt(dt)
         # Calculate the Wiener increment dW. 
         # For Brownian motion, variance scales with dt, so std_dev scales with sqrt(dt).
@@ -50,6 +49,6 @@ def additive_noise(v0,w0):
     #print("Equilibrium function:", (v_e, w_e))
     J, J_e = neuron.jacobian()
     #print("Jacobian Function:", J_e)
-    neuron.is_excitable()
+    #neuron.is_excitable()
 
     return v,w,v_e,w_e,J_e
