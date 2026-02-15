@@ -2,9 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from Models.FHN import FHN
 import simulation
-from visualization.phase_portrait import plotting
 
-I_ext,a,b,tau = simulation.path_calling()
+I_ext,a,b,tau = simulation.path_calling_fhn()
 
 neuron = FHN(a, b, tau, I_ext)
 
@@ -30,7 +29,7 @@ def add_noise_phase_portrait(sigma):
     Captures the 'fuzzy' limit cycle where constant random fluctuations 
     force the system out of the stable fixed point into noise-induced spikes.
     """
-    v,w,v_e,w_e,J_e = simulation.additive_noise(-1.00125,-0.4, sigma)
+    v,w,v_e,w_e,J_e = simulation.additive_noise_fhn(-1.00125,-0.4, sigma)
     plotting(v,w,v_e,w_e)
 
 
