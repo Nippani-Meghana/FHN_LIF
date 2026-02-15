@@ -1,6 +1,6 @@
 import numpy as np
 from Models.FHN import FHN
-from simulation import path_calling
+from simulation.path_calling import path_calling_fhn
 
 
 def deterministic(v0,w0):
@@ -24,7 +24,7 @@ def deterministic(v0,w0):
             - w_e (float): Equilibrium value of the recovery variable.
             - J_e (ndarray): The Jacobian matrix evaluated at the equilibrium point.
     """
-    I_ext,a,b,tau =path_calling()
+    I_ext,a,b,tau =path_calling_fhn()
 
     dt = 0.01        # timestep
     T = 1000           # total time
