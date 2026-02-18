@@ -2,8 +2,8 @@
   "lif_parameters": {
     "I_ext": 1.5,
     "R": 10,
-    "V_r" : -65,
-    "sigma": 0.75,
+    "V_r" : -65.0,
+    "sigma": 3.0,
     "tau": 12.5
   }
 }
