@@ -51,25 +51,26 @@ def timeseries(ch, sigma):
 
     plt.show()
 
-    print("Plotting Wt vs T...")
-    tw = np.arange(len(w_data)) * dt
-    fig, ax = plt.subplots(figsize=(10, 4))
-    ax.plot(tw,w_data,color='blue', linewidth=0.8)
-    ax.set_ylim([-1.2,1.7])
-    ax.set_yticks([-1.0,-0.5,0,0.5,1,1.5])
-    ax.set_xlabel('T (ms)')
-    ax.set_ylabel('Wt (recovery variable)')
-    
-    # Create dynamic title based on simulation type
-    if ch == 1:
-        title = 'Deterministic FHN'
-    if ch == 2:
-        title = f'Additive Noise FHN: sigma = {sigma}'
-    if ch == 3:
-        title = f'Multiplicative Noise FHN: sigma = {sigma}'
-    
-    ax.set_title(title)
-    plt.show()
+    if ch in [1, 2, 3]:  # Only plot w(t) for FHN simulations
+        print("Plotting Wt vs T...")
+        tw = np.arange(len(w_data)) * dt
+        fig, ax = plt.subplots(figsize=(10, 4))
+        ax.plot(tw,w_data,color='blue', linewidth=0.8)
+        ax.set_ylim([-1.2,1.7])
+        ax.set_yticks([-1.0,-0.5,0,0.5,1,1.5])
+        ax.set_xlabel('T (ms)')
+        ax.set_ylabel('Wt (recovery variable)')
+        
+        # Create dynamic title based on simulation type
+        if ch == 1:
+            title = 'Deterministic FHN'
+        if ch == 2:
+            title = f'Additive Noise FHN: sigma = {sigma}'
+        if ch == 3:
+            title = f'Multiplicative Noise FHN: sigma = {sigma}'
+        
+        ax.set_title(title)
+        plt.show()
 
 
 
