@@ -56,29 +56,44 @@ def additive_noise_fhn(v0,w0, sigma):
     return v,w,v_e,w_e,J_e
 
 
-def additive_noise_lif():
+def additive_noise_lif(sigma):
     dt = 0.01        # timestep
     T = 1000           # total time
     steps = int(T/dt)
 
-    I_ext, R, V_r, sigma, tau = path_calling_lif()
+    I_ext, R, V_r, tau = path_calling_lif()
 
-    neuron_2 = LIF(I_ext,R, V_r, sigma, tau)
+    neuron_2 = LIF(I_ext,R, V_r, tau)
     v = np.zeros(steps)
-
     v[0] = V_r
+    
     spike_times = []
+    
+    v_th = -55.0
+    v_peak = 20.0
+    
+    t_ref = 5.0  # Absolute refractory period in milliseconds
+    refractory_time_left = 0.0  # Countdown timer
+
     for i in range(1, steps):
+        
+        # 1. Check if we are in the refractory period
+        if refractory_time_left > 0:
+            v[i] = V_r  # Clamp voltage to resting state
+            refractory_time_left -= dt  # Tick down the timer
+            continue    # Skip the math below and go to the next timestep
+            
+        # 2. If NOT in refractory, do the normal integration
         noise = sigma * np.random.normal(0, 1) * np.sqrt(dt)
         v[i] = v[i-1] + neuron_2.leaky_integrate_and_fire_model(v[i-1])*dt + noise
 
-        v_th = -55.0
-        v_peak = 20
-
+        # 3. Spike Detection
         if v[i] >= v_th:
-                    v[i-1] = v_peak         # Draw peak
-                    v[i] = V_r              # Reset the current step
-                    spike_times.append(i)   # Record spike
+            v[i-1] = v_peak         # Draw peak
+            v[i] = V_r              # Reset the current step
+            spike_times.append(i)   # Record spike
+            
+            #the refractory countdown!
+            refractory_time_left = t_ref 
 
-    # The array returned now has the actual spikes and resets built-in
     return v, spike_times

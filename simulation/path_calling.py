@@ -45,7 +45,6 @@ def path_calling_lif():
     I_ext = params["lif_parameters"]["I_ext"]
     R = params["lif_parameters"]["R"]
     V_r = params["lif_parameters"]["V_r"]
-    sigma = params["lif_parameters"]["sigma"]
     tau = params["lif_parameters"]["tau"]
     
-    return I_ext, R, V_r, sigma, tau
+    return I_ext, R, V_r, tau

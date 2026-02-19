@@ -91,7 +91,7 @@ class ensemble_stats:
         elif(ch == 3):
             v,w,v_e,w_e,J_e = simulation.multiplicative_noise(-1.00125,-0.4, sigma)
         elif(ch == 4):
-            v, spike_times = simulation.additive_noise_lif()
+            v, spike_times = simulation.additive_noise_lif(sigma)
             return spike_times
         else:
             print("Invalid Choice!")
