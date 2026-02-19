@@ -98,7 +98,7 @@ stochastic-neuron-models-comparison
 │   └── ensemble_stats.py   # Ensemble trials, spike detection, stats (CV, Fano)
 ├── config
 │   ├── fhn_params.json     # FHN parameters (I_ext, a, b, tau)
-│   └── lif_params.json     # LIF parameters (I_ext, R, V_r, sigma, tau)
+│   └── lif_params.json     # LIF parameters (I_ext, R, V_r, tau)
 ├── allen_data
 │   └── biological_isi.npy  # Preprocessed biological ISI data
 └── main.py                 # Interactive dashboard
