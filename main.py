@@ -147,9 +147,7 @@ while(True):
         fhn_ms = np.array(fhn_isi_timesteps) * dt if fhn_isi_timesteps else np.array([])
         lif_ms = np.array(lif_isi_timesteps) * dt if lif_isi_timesteps else np.array([])
 
-        print("\n" + "="*40)
         print("FINAL STATISTICAL BENCHMARKS")
-        print("="*40)
 
         # --- 1. Calculate and Compare CV ---
         bio_cv = np.std(bio_isi_ms) / np.mean(bio_isi_ms)
